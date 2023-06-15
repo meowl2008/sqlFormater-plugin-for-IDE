@@ -4,16 +4,21 @@
     <name>Sql_wrapper_plugin2</name>
     <version>0.1.2</version>
     <vendor email="supermpf1987@gmail.com">Meo</vendor>
-
+    <idea-version since-build="183.2407.10"/>
     <description><![CDATA[
-        <p>Just a private sql tool for Java. Use to format sql sentences and surround with StringBuilder append func.</p>
+        <p>A sql tool for Java. Use to format sql sentences and surround with StringBuilder "append" function.</p>
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
 
+    <actions>
+        <action id="com.meo.sqlWrapper.core.WrapperAction" class="com.meo.sqlWrapper.core.WrapperAction" text="Wrap your sql">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+    </actions>
+
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-
     </extensions>
 </idea-plugin>

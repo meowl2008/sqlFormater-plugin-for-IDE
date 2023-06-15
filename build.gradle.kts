@@ -1,14 +1,19 @@
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "1.8.21"
-    id("org.jetbrains.intellij") version "1.13.3"
+    id("org.jetbrains.intellij") version "1.14.1"
 }
 
 group = "com.meo"
 version = "0.1.2"
 
 repositories {
+    mavenLocal()
     mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
 }
 
 // Configure Gradle IntelliJ Plugin
@@ -16,8 +21,12 @@ repositories {
 intellij {
     version.set("2022.2.5")
     type.set("IC") // Target IDE Platform
+    plugins.set(listOf(
+    ))
+}
 
-    plugins.set(listOf(/* Plugin Dependencies */))
+dependencies {
+    implementation ("com.github.vertical-blank:sql-formatter:2.0.4")
 }
 
 tasks {

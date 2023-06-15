@@ -1,16 +1,8 @@
 pluginManagement {
     repositories {
+        mavenLocal()
         mavenCentral()
         gradlePluginPortal()
-    }
-}
-buildscript {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    dependencies {
-        classpath("com.github.vertical-blank:sql-formatter:2.0.4")
     }
 }
 
