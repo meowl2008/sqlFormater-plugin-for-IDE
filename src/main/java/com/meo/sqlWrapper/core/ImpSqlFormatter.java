@@ -35,7 +35,7 @@ public class ImpSqlFormatter implements IFormatter {
     private List<String> updateLines(List<String> lines) {
         String sbObjName = "sql";
         String prefix = sbObjName + ".append(" + "\" ";
-        String suffix = " \");\n";
+        String suffix = " \");";
         return lines.stream().filter(StringUtils::isNotBlank).map(line -> prefix + line + suffix).collect(Collectors.toList());
     }
 }
