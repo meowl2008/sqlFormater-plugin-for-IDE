@@ -6,14 +6,18 @@
     <vendor email="supermpf1987@gmail.com">Meo</vendor>
     <idea-version since-build="183.2407.10"/>
     <description><![CDATA[
-        <p>A sql tool for Java. Use to format sql sentences and surround with StringBuilder "append" function.</p>
+        <p>A simple sql formatter tool for Java.</p>
+        <p>The sql formatter dependent on <a href="https://github.com/vertical-blank/sql-formatter">https://github.com/vertical-blank/sql-formatter</a></p>
+        <p><b>Usage:</b></p>
+        <p>1. in *.java files, format the sql sentences and surround with StringBuilder "append" function.</p>
+        <p>2. in other files, only format the sql.</p>
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.java</depends>
 
     <actions>
-        <action id="com.meo.sqlWrapper.core.WrapperAction" class="com.meo.sqlWrapper.core.WrapperAction" text="Wrap Your Sql">
+        <action id="com.meo.sqlWrapper.core.WrapperAction" class="com.meo.sqlWrapper.core.WrapperAction" text="Format Your Sql">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
     </actions>

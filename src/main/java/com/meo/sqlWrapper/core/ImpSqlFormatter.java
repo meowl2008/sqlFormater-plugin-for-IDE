@@ -28,7 +28,7 @@ public class ImpSqlFormatter implements IFormatter {
             try {
                 String formatSql = SqlFormatter.of(formatCfg.getDefaultDialect()).format(text, formatCfg.createFormatWithDefaultConfig());
                 logger.debug(formatSql);
-                lines = Arrays.stream(StringUtils.split(formatSql, '\n')).map(StringUtils::trim).collect(Collectors.toList());
+                lines = Arrays.stream(StringUtils.split(formatSql, '\n')).collect(Collectors.toList());
             } catch (Exception e) {
                 logger.debug("Failed sql:" + text);
                 logger.error("Format Failed.", e);
@@ -46,6 +46,7 @@ public class ImpSqlFormatter implements IFormatter {
 
     @Override
     public boolean validateSql(String text) {
+        // TODO
         return IFormatter.super.validateSql(text);
     }
 }
