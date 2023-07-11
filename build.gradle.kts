@@ -22,6 +22,7 @@ intellij {
     version.set("2022.2.5")
     type.set("IC") // Target IDE Platform
     plugins.set(listOf(
+            "com.intellij.java"
     ))
 }
 

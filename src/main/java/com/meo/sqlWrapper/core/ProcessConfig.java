@@ -2,6 +2,7 @@ package com.meo.sqlWrapper.core;
 
 import com.github.vertical_blank.sqlformatter.core.FormatConfig;
 import com.github.vertical_blank.sqlformatter.languages.Dialect;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * @author Meo
@@ -19,7 +20,12 @@ public class ProcessConfig {
     private boolean upperCase = SQL_FORMAT_UPPERCASE;
     private Dialect dialect = SQL_FORMAT_DIALECT_MYSQL;
 
+    public static final String DEFAULT_VAR_ALIAS_NAME = "sql";
+
     private static ProcessConfig instance;
+
+    private String varAliasName = DEFAULT_VAR_ALIAS_NAME;
+    private boolean isOnlyFormat = false;
 
     private ProcessConfig() {
     }
@@ -31,7 +37,11 @@ public class ProcessConfig {
         return instance;
     }
 
-    public FormatConfig createFormatConfig() {
+    public void copy(ProcessConfig cfg) {
+        instance = cfg;
+    }
+
+    public FormatConfig createFormatWithDefaultConfig() {
         return FormatConfig.builder().indent(indent).maxColumnLength(maxLen).uppercase(upperCase).build();
     }
 
@@ -53,6 +63,26 @@ public class ProcessConfig {
 
     public ProcessConfig getInstance() {
         return instance;
+    }
+
+    public String getVarAliasName() {
+        return varAliasName;
+    }
+
+    public ProcessConfig setVarAliasName(String varAliasName) {
+        if (StringUtils.isNotBlank(varAliasName)) {
+            this.varAliasName = varAliasName;
+        }
+        return this;
+    }
+
+    public boolean isOnlyFormat() {
+        return isOnlyFormat;
+    }
+
+    public ProcessConfig setFormatType(boolean isOnlyFormat) {
+        this.isOnlyFormat = isOnlyFormat;
+        return this;
     }
 
 }

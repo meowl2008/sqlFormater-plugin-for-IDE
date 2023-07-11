@@ -10,9 +10,10 @@
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
 
     <actions>
-        <action id="com.meo.sqlWrapper.core.WrapperAction" class="com.meo.sqlWrapper.core.WrapperAction" text="Wrap your sql">
+        <action id="com.meo.sqlWrapper.core.WrapperAction" class="com.meo.sqlWrapper.core.WrapperAction" text="Wrap Your Sql">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
     </actions>

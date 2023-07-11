@@ -16,26 +16,36 @@ import java.util.stream.Collectors;
  */
 public class ImpSqlFormatter implements IFormatter {
     private static final Logger logger = Logger.getInstance(ImpSqlFormatter.class);
-    private ProcessConfig cfg = ProcessConfig.build();
+
+    public ImpSqlFormatter(ProcessConfig cfg) {
+        setFormatConfig(cfg);
+    }
 
     @Override
     public List<String> formatSql(String text) {
         List<String> lines = new ArrayList<>(0);
-        try {
-            String formatSql = SqlFormatter.of(cfg.getDefaultDialect()).format(text, cfg.createFormatConfig());
-            logger.debug(formatSql);
-            lines = Arrays.stream(StringUtils.split(formatSql, '\n')).map(StringUtils::trim).collect(Collectors.toList());
-        } catch (Exception e) {
-            logger.debug("Failed sql:" + text);
-            logger.error("Format Failed.", e);
+        if (validateSql(text)) {
+            try {
+                String formatSql = SqlFormatter.of(formatCfg.getDefaultDialect()).format(text, formatCfg.createFormatWithDefaultConfig());
+                logger.debug(formatSql);
+                lines = Arrays.stream(StringUtils.split(formatSql, '\n')).map(StringUtils::trim).collect(Collectors.toList());
+            } catch (Exception e) {
+                logger.debug("Failed sql:" + text);
+                logger.error("Format Failed.", e);
+            }
         }
         return updateLines(lines);
     }
 
     private List<String> updateLines(List<String> lines) {
-        String sbObjName = "sql";
-        String prefix = sbObjName + ".append(" + "\" ";
-        String suffix = " \");";
+        String sbObjName = formatCfg.getVarAliasName();
+        String prefix = !formatCfg.isOnlyFormat() ? sbObjName + ".append(" + "\" " : "";
+        String suffix = !formatCfg.isOnlyFormat() ? " \");" : "";
         return lines.stream().filter(StringUtils::isNotBlank).map(line -> prefix + line + suffix).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean validateSql(String text) {
+        return IFormatter.super.validateSql(text);
     }
 }
