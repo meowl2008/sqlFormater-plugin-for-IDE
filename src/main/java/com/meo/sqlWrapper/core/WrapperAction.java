@@ -88,12 +88,15 @@ public class WrapperAction extends AnAction {
         Editor editor = event.getData(CommonDataKeys.EDITOR);
 
         // get the current document file name
-        String fileName = Objects.requireNonNull(event.getData(CommonDataKeys.PSI_FILE)).getName();
+        PsiFile psiFile = event.getData(CommonDataKeys.PSI_FILE);
+        if (psiFile != null) {
+            String fileName = psiFile.getName();
 
-        // Set visibility only in the case of
-        // existing project editor, and selection
-        event.getPresentation().setEnabledAndVisible(project != null
-                && editor != null && editor.getSelectionModel().hasSelection());
+            // Set visibility only in the case of
+            // existing project editor, and selection
+            event.getPresentation().setEnabledAndVisible(project != null
+                    && editor != null && editor.getSelectionModel().hasSelection());
+        }
     }
 
     /**
